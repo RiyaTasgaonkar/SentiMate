@@ -1,3 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver 
+from django.db.models.signals import post_save
 
 # Create your models here.
+
+class Profile(models.Model):
+    Male = 'M'
+    Female = 'F'
+    RatherNotSay = 'O'
+    GENDER_CHOICES = ((Male, 'Male'),(Female, 'Female'),(RatherNotSay,'Rather Not Say'),)
+
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, blank=False)
+    emailid = models.EmailField(blank=False)
+    facebook = models.URLField(blank=True)
+    linkedin = models.URLField(blank=True)
+    instagram = models.URLField(blank=True)
+    gender = models.CharField(max_length = 20, choices = GENDER_CHOICES, default = Male)
+    bio = models.TextField(max_length=250, blank=False)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
