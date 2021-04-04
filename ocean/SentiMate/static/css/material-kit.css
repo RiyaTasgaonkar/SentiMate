@@ -2839,7 +2839,6 @@ select.form-control-lg:not([size]):not([multiple]),
 .btn:focus,
 .btn.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(156, 39, 176, 0.25);
 }
 
 .btn.disabled,
@@ -2858,10 +2857,6 @@ select.form-control-lg:not([size]):not([multiple]),
   box-shadow: none;
 }
 
-.btn:not(:disabled):not(.disabled):active:focus,
-.btn:not(:disabled):not(.disabled).active:focus {
-  box-shadow: 0 0 0 0.2rem rgba(156, 39, 176, 0.25), none;
-}
 
 a.btn.disabled,
 fieldset:disabled a.btn {
@@ -2881,10 +2876,6 @@ fieldset:disabled a.btn {
   border-color: #771e86;
 }
 
-.btn-primary:focus,
-.btn-primary.focus {
-  box-shadow: none, 0 0 0 0.2rem rgba(156, 39, 176, 0.5);
-}
 
 .btn-primary.disabled,
 .btn-primary:disabled {

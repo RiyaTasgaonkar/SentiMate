@@ -6,8 +6,12 @@
     --green: #8ac926;
     --voilet: #6a4c93;
     --dark-gray:#404040
-  }
-  
+}
+
+#bg{
+    height: 100%;
+}
+
 body{
     background-color: var(--white) !important;
 }
@@ -16,12 +20,37 @@ hr{
     background-color: var(--yellow) !important;
     height: 2px !important;
 }
+
+label{
+    font-size: 0.875rem !important;
+    color: var(--dark-gray) !important;
+}
+
+input{
+    height: 36px !important;
+    border-radius: 0;
+    font-size: 14px !important;
+    outline: 0;
+    border-width: 0 0 1.5px !important;
+    border-color: var(--dark-gray) !important;
+    width: 100%;
+    display: block !important;
+}
+
+input:focus{
+    border-color: var(--blue) !important;
+}
+
 .nav-item{
-    color: var(--blue) !important;
+    color: var(--dark-gray) !important;
 }
 
 .navbar-brand{
     color: var(--dark-gray) !important;
+}
+
+.dropdown-item:hover{
+    background-color: var(--dark-gray) !important;
 }
 
 .header-title, .section-headline{
@@ -32,12 +61,41 @@ hr{
     text-align: center;
 }
 
+.btn-primary:hover{
+    box-shadow: none !important;
+}
 .btn-coral{
     background-color: var(--coral) !important;
 }
 
 .btn-yellow{
     background-color: var(--yellow) !important;
+}
+.btn-blue{
+    background-color: var(--blue) !important;
+}
+
+.btn-link-blue{
+    color: var(--blue) !important;
+}
+.btn-link-dark{
+    color: var(--dark-gray) !important;
+}
+
+.card-header-green{
+    background: var(--green) !important;
+}
+.card-header-coral{
+    background: var(--coral) !important;
+}
+.card-header-yellow{
+    background: var(--yellow) !important;
+}
+.card-header-voilet{
+    background: var(--voilet) !important;
+}
+.card-header-blue{
+    background: var(--blue) !important;
 }
 
 footer{
@@ -58,4 +116,13 @@ footer{
     height: 80%;
     width: 80%;
     padding: 3rem 1.5rem 0 1.5rem;
+}
+
+.helptext, li{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 200;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
 }
