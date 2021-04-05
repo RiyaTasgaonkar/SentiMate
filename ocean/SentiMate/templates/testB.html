@@ -84,12 +84,12 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </nav>
  
-  <div class="page-header header-filter" id="bg" data-parallax="true" style="background-image: url('{% static "img/VeryBlue.jpg" %}')">
+  <div class="page-header header-filter" id="bg" data-parallax="true" style="background-image: url({% static "img/VeryBlue.jpg" %})">
     <div class="container">
       <div class="row my-5 py-6">
         <div class="col-md-8 ml-auto mr-auto">
           <div class="brand text-center my-5 py-6">
-            <p class="h2 py-5">Our Tests for Trait Identification</p>
+            <p class="h2 py-5">SentiMate - Test B</p>
           </div>
         </div>
       </div>
@@ -98,68 +98,48 @@ The above copyright notice and this permission notice shall be included in all c
   <div class="main main-raised mb-5">
     <div class="container">
       <div class="section text-center">
-        {% if messages %}
-        {% for msg in messages%}
-        <div class="alert alert-dark">
-          {{ msg }}
-        </div>
-        {% endfor %}
-        {% endif %}
-        <p class="h4">Please attempt all our test to obtain your results and avail our compatibility testing feature.</p>
+        <p class="h4">Please answer all these questions.</p><br>
         <div class="container">
-            <div class="col-md-11 mx-auto">
+            <div class="col-md-9 mx-auto">
+              <p style="text-align:left">1 - Strongly Disagree; 3 - Neutral;  5 - Strongly Agree</p><br><br>
               <div class="row">
-                <div class="col-md-4 mx-auto py-5">
-                    <div class="card">
-                        <div class="card-header card-header-text card-header-coral">
-                          <div class="card-text">
-                            <h4 class="card-title">Test A</h4>
+                <div class="card" style="text-align:left">
+                    <div class="card-header card-header-blue text-center">
+                      <h4 class="card-title">Attempt Test</h4>
+                    </div>
+                    <div class="card-body">
+                      <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                        {% for field in form.visible_fields %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                              {{ field.errors }}
+                              {{ field.help_text }}
+                            </div>
+                            <div class="col-sm-6 mx-auto" style="text-align: center;">
+                                {% for radio in field %}
+                                    <label for="{{ radio.id_for_label }}" class="px-2">
+                                        {{ radio.choice_label }}
+                                        <span class="radio">{{ radio.tag }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
                           </div>
+                        {% endfor %}
+                    </fieldset>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-round btn-blue" type="submit">Submit</button>
                         </div>
-                        <div class="card-body">
-                            Select the qualities that best descibe you from our curated set of qualities.<br>
-                            <button class="btn btn-primary btn-link btn-link-dark" >Proceed</button>
-                        </div>
-                    </div>                  
-                </div>
-                <div class="col-md-4 mx-auto py-5">
-                    <div class="card">
-                        <div class="card-header card-header-text card-header-green">
-                          <div class="card-text">
-                            <h4 class="card-title">Test B</h4>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                           Answer all the question to determine the perslonality group you belong to.<br>
-                           <button class="btn btn-primary btn-link btn-link-dark" >Proceed</button>
-                        </div>
-                    </div>  
-                </div>
-                <div class="col-md-4 mx-auto py-5">
-                    <div class="card">
-                        <div class="card-header card-header-text card-header-voilet">
-                          <div class="card-text">
-                            <h4 class="card-title">Test C</h4>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                            We determine you traits based on your social media activities.<br>
-                            <button class="btn btn-primary btn-link btn-link-dark" >Proceed</button>
-                        </div>
-                    </div>  
-                </div>        
-              </div>
-              <div class="mx-auto pt-1">
-                <button class="btn btn-primary btn-round btn-yellow mx-auto">Result</button>
-                <button class="btn btn-primary btn-round btn-yellow mx-auto">Compare</button>
-              </div>
+                      </form>
+                    </div>
+                </div>      
             </div>
           </div>
       </div>
     </div>
   </div>
-  
-
+  </div>
   <footer class="container-fluid">
     <div class="row mx-auto">
     <div class="py-1" style="color: #f5eded;" > Made with <i class="fas fa-heart" style="color: #ff595e;"></i> by RNA</div>

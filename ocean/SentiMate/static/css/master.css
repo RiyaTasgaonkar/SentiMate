@@ -41,6 +41,14 @@ input:focus, select:focus, textarea:focus{
     border-color: var(--blue) !important;
 }
 
+.alert-dark{
+    background-color: var(--dark-gray) !important;
+    color: #fafafa !important;
+}
+.radio{
+    font-size: 1rem !important;
+}
+
 .nav-item{
     color: var(--dark-gray) !important;
 }

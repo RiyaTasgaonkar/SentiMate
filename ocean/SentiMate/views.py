@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, ProfileUpdateForm
+from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm
+from .TestB import questions
+from .models import TestB
 
 
 # Create your views here.
@@ -41,6 +43,24 @@ def profile(request):
         form = ProfileUpdateForm(instance=request.user.profile)
     context = {'user' : user, 'form' : form}
     return render(request, 'profile.html', context)
+
+@login_required
+def testB(request):
+    user = request.user.username
+    q = list(questions.get_values_for_questions())
+    if request.method == 'POST':
+        form = TestBForm(request.POST)
+        data = []
+        if  form.is_valid():
+            ocean = form.process()
+            instance = TestB(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+            instance.save()
+            messages.success(request, f'Your response for test B has been saved.')
+            return redirect('tests')
+    else:
+        form = TestBForm()
+    context = {'user' : user, 'form' : form, 'q': q, 'count':0}
+    return render(request, 'TestB.html', context)
         
 
 @login_required
