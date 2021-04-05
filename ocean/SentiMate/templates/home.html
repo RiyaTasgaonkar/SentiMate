@@ -21,7 +21,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Kit by Creative Tim
+    SentiMate
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -41,7 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="">SentiMate</a>
+        <a class="navbar-brand" href="{% url 'home' %}">SentiMate</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
@@ -52,12 +52,12 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="" target="_blank">
+            <a class="nav-link" href="{% url 'login' %}">
               Login
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="" target="_blank">
+            <a class="nav-link" href="{% url 'register' %}">
               Register
             </a>
           </li>
@@ -72,10 +72,17 @@ The above copyright notice and this permission notice shall be included in all c
           <img src="{% static 'img/home-image.svg'%}" alt="blog-image" style="width: 90%;">
         </div>
         <div class="col-md-6 order-sm-2 order-md-1 ml-auto" style="margin: 2rem 0;">
+            {% if messages %}
+            {% for msg in messages%}
+            <div class="alert alert-dark">
+              {{ msg }}
+            </div>
+            {% endfor %}
+            {% endif %}
             <p class="h1 header-title">SentiMate</p>
             <hr>
             <p class="h5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-            <button class="btn btn-primary btn-round btn-coral">Take Test</button>
+            <a class="btn btn-primary btn-round btn-coral" href="{% url 'tests' %}">Take Test</a>
         </div>
       </div>
     </div>
@@ -112,8 +119,8 @@ The above copyright notice and this permission notice shall be included in all c
         <p class="h4 mx-auto pt-3" style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquakf body text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
         <br><br>
         <div class="mx-auto pt-3">
-          <button class="btn btn-primary btn-round btn-yellow mx-auto">Know More</button>
-          <button class="btn btn-primary btn-round btn-yellow mx-auto">Take Test</button>
+          <a class="btn btn-primary btn-round btn-yellow mx-auto" href="">Know More</a>
+          <a class="btn btn-primary btn-round btn-yellow mx-auto" href="{% url 'tests' %}">Take Test</a>
         </div>
       </div>
     </div>
