@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from .TestB import questions
+from django.core.files import File
+from django.conf import settings
 import pickle
+import os
 import pandas as pd
 import numpy as np
 
@@ -37,8 +40,12 @@ class TestBForm(forms.Form):
 		ocean.append(14 - int(self.cleaned_data['AGR1']) + int(self.cleaned_data['AGR2']) - int(self.cleaned_data['AGR3']) + int(self.cleaned_data['AGR4']) - int(self.cleaned_data['AGR5']) + int(self.cleaned_data['AGR6']) - int(self.cleaned_data['AGR7']) + int(self.cleaned_data['AGR8']) + int(self.cleaned_data['AGR9']) + int(self.cleaned_data['AGR10']))
 		ocean.append(38 - int(self.cleaned_data['EST1']) + int(self.cleaned_data['EST2']) - int(self.cleaned_data['EST3']) + int(self.cleaned_data['EST4']) - int(self.cleaned_data['EST5']) - int(self.cleaned_data['EST6']) - int(self.cleaned_data['EST7']) - int(self.cleaned_data['EST8']) - int(self.cleaned_data['EST9']) - int(self.cleaned_data['EST10']))
 		ocean = [ocean]
-		model = pickle.load(open("C:\\Users\\Riya\\Desktop\\SentiMate\\ocean\\SentiMate\\TestB\\model.pkl", 'rb')) 
-		dataclusters = pd.read_csv('C:\\Users\\Riya\\Desktop\\SentiMate\\ocean\\SentiMate\\TestB\\clusters.csv')
+		file_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestB/model.pkl')
+		with open(file_path, 'rb') as f:
+			model = pickle.load(f) 
+		file_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestB/clusters.csv')
+		dataclusters = pd.read_csv(file_path)
 		cluster = model.predict(ocean)
 		scores = np.array(dataclusters.iloc[cluster,1:6], dtype = 'int')[0]
 		return scores
+

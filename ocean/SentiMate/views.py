@@ -59,7 +59,7 @@ def testB(request):
             return redirect('tests')
     else:
         form = TestBForm()
-    context = {'user' : user, 'form' : form, 'q': q, 'count':0}
+    context = {'user' : user, 'form' : form, 'q': q}
     return render(request, 'TestB.html', context)
         
 
