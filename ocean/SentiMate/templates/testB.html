@@ -111,7 +111,7 @@ The above copyright notice and this permission notice shall be included in all c
                       <form method="POST">
                         {% csrf_token %}
                         <fieldset class="form-group">
-                        {% for field in form.visible_fields %}
+                        {% for field in form.visible_fields %}<br>
                         <div class="row">
                             <div class="col-sm-6">
                               {{ field.errors }}
@@ -119,7 +119,7 @@ The above copyright notice and this permission notice shall be included in all c
                             </div>
                             <div class="col-sm-6 mx-auto" style="text-align: center;">
                                 {% for radio in field %}
-                                    <label for="{{ radio.id_for_label }}" class="px-2">
+                                    <label for="{{ radio.id_for_label }}" class="px-3">
                                         {{ radio.choice_label }}
                                         <span class="radio">{{ radio.tag }}</span>
                                     </label>
