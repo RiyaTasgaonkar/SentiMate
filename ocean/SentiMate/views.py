@@ -16,6 +16,18 @@ def home(request):
 def ocean(request):
     return render(request,'ocean.html')
 
+def scores(request):
+    user = request.user.username
+    found, data, labels = False, [], []
+    score = TestB.objects.filter(user__exact = request.user)
+    if score:
+        for s in score:
+            data = [s.o, s.c, s.e, s.a, s.n]
+            labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
+        found = True
+    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found }
+    return render(request, 'scores.html',context)
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
