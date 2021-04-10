@@ -13,6 +13,9 @@ from .models import TestB
 def home(request):
     return render(request,'home.html')
 
+def ocean(request):
+    return render(request,'ocean.html')
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

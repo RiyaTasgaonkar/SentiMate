@@ -105,6 +105,9 @@ input:focus, select:focus, textarea:focus{
 .card-header-blue{
     background: var(--blue) !important;
 }
+.list-group-item{
+    font-size: 1rem !important;
+}
 
 footer{
     background-color: var(--dark-gray) !important;
