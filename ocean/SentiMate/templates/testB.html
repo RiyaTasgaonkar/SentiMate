@@ -29,7 +29,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
-  
+
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
   <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
@@ -78,7 +78,7 @@ The above copyright notice and this permission notice shall be included in all c
       </div>
     </div>
   </nav>
- 
+
   <div class="page-header header-filter" id="bg" data-parallax="true" style="background-image: url({% static "img/VeryBlue.jpg" %})">
     <div class="container">
       <div class="row my-5 py-6">
@@ -95,49 +95,49 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="section text-center">
         <p class="h4">Please answer all these questions.</p><br>
         <div class="container">
-            <div class="col-md-9 mx-auto">
-              <p style="text-align:left">1 - Strongly Disagree; 3 - Neutral;  5 - Strongly Agree</p><br><br>
-              <div class="row">
-                <div class="card" style="text-align:left">
-                    <div class="card-header card-header-blue text-center">
-                      <h4 class="card-title">Attempt Test</h4>
-                    </div>
-                    <div class="card-body">
-                      <form method="POST">
-                        {% csrf_token %}
-                        <fieldset class="form-group">
-                        {% for field in form.visible_fields %}<br>
-                        <div class="row">
-                            <div class="col-sm-6">
-                              {{ field.errors }}
-                              {{ field.help_text }}
-                            </div>
-                            <div class="col-sm-6 mx-auto" style="text-align: center;">
-                                {% for radio in field %}
-                                    <label for="{{ radio.id_for_label }}" class="px-2 mx-1">
-                                        {{ radio.choice_label }}
-                                        <span class="radio">{{ radio.tag }}</span>
-                                    </label>
-                                {% endfor %}
-                            </div>
-                          </div>
-                        {% endfor %}
-                    </fieldset>
-                        <div class="form-group">
-                          <button class="btn btn-primary btn-round btn-blue" type="submit">Save</button>
+          <div class="col-md-9 mx-auto">
+            <p style="text-align:left">1 - Strongly Disagree; 3 - Neutral; 5 - Strongly Agree</p><br><br>
+            <div class="row">
+              <div class="card" style="text-align:left">
+                <div class="card-header card-header-blue text-center">
+                  <h4 class="card-title">Attempt Test</h4>
+                </div>
+                <div class="card-body">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                      {% for field in form.visible_fields %}<br>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          {{ field.errors }}
+                          {{ field.help_text }}
                         </div>
-                      </form>
+                        <div class="col-sm-6 mx-auto" style="text-align: center;">
+                          {% for radio in field %}
+                          <label for="{{ radio.id_for_label }}" class="px-2 mx-1">
+                            {{ radio.choice_label }}
+                            <span class="radio">{{ radio.tag }}</span>
+                          </label>
+                          {% endfor %}
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </fieldset>
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-round btn-blue" type="submit">Save</button>
                     </div>
-                </div>      
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
   <footer class="container-fluid">
     <div class="row mx-auto">
-    <div class="py-1" style="color: #f5eded;" > Made with <i class="fas fa-heart" style="color: #ff595e;"></i> by RNA</div>
+      <div class="py-1" style="color: #f5eded;"> Made with <i class="fas fa-heart" style="color: #ff595e;"></i> by RNA</div>
     </div>
   </footer>
   <!--   Core JS Files   -->
