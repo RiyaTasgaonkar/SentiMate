@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm
+from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm
 from .TestB import questions
-from .models import TestB
+from .TestA import questionsA
+from .models import TestB, TestA
 
 
 # Create your views here.
@@ -60,12 +61,28 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 @login_required
+def testA(request):
+    user = request.user.username
+    q = list(questionsA.get_questions_and_options())
+    if request.method == 'POST':
+        form = TestAForm(request.POST)
+        if  form.is_valid():
+            ocean = form.process()
+            instance = TestA(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+            instance.save()
+            messages.success(request, f'Your response for test A has been saved.')
+            return redirect('tests')
+    else:
+        form = TestAForm()
+    context = {'user' : user, 'form' : form, 'q': q}
+    return render(request, 'TestA.html', context)
+
+@login_required
 def testB(request):
     user = request.user.username
     q = list(questions.get_values_for_questions())
     if request.method == 'POST':
         form = TestBForm(request.POST)
-        data = []
         if  form.is_valid():
             ocean = form.process()
             instance = TestB(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
