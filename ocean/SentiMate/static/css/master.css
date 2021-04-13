@@ -50,10 +50,13 @@ input[type="radio"] {
     background-color: #40404020 !important;
 }
 
-.radio{
+.radio-A{
     font-size: 1rem !important;
+    display: inline !important;
 }
-
+.formA-label{
+    display: inline !important;
+}
 .nav-item{
     color: var(--dark-gray) !important;
 }

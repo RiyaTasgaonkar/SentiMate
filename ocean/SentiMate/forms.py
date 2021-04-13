@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from .TestB import questions
 from .TestA import questionsA
+from .TestC import facebook_scrapper
 from django.core.files import File
 from django.conf import settings
 import pickle
@@ -29,7 +30,7 @@ class TestBForm(forms.Form):
 		tags = list(questions.get_keys_for_questions())
 		question = list(questions.get_values_for_questions())
 		for i in range(0, 50):
-			self.fields[tags[i]] = forms.ChoiceField(choices=ANSWER_CHOICES, widget=forms.RadioSelect(),help_text = question[i])
+			self.fields[tags[i]] = forms.ChoiceField(choices=ANSWER_CHOICES, widget=forms.RadioSelect(), help_text = question[i])
 
 	def process(self):
 		ocean = []
@@ -63,4 +64,16 @@ class TestAForm(forms.Form):
 			x = int(self.cleaned_data['Question' + str(i)])
 			ocean[x - 1] = ocean[x-1] +20
 		return ocean
+
+class TestCForm(forms.Form):
+	username = forms.CharField()
+	password = forms.CharField()
+
+	def process(self):
+		username, password = self.cleaned_data['username'], self.cleaned_data['password']
+		bot = facebook_scrapper.fb_bot()
+		bot.login(username,password)
+		posts_scraped = bot.post_scraping()
+		posts_scraped = bot.remove_blank(posts_scraped)
+		bot.convert_to_csv(posts_scraped)
 

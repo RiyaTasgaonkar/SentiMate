@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm
+from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm
 from .TestB import questions
 from .TestA import questionsA
 from .models import TestB, TestA
@@ -16,18 +16,6 @@ def home(request):
 
 def ocean(request):
     return render(request,'ocean.html')
-
-def scores(request):
-    user = request.user.username
-    found, data, labels = False, [], []
-    score = TestB.objects.filter(user__exact = request.user)
-    if score:
-        for s in score:
-            data = [s.o, s.c, s.e, s.a, s.n]
-            labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
-        found = True
-    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found }
-    return render(request, 'scores.html',context)
 
 def register(request):
     if request.method == 'POST':
@@ -41,10 +29,19 @@ def register(request):
         form = UserRegisterForm()
     return render(request,'register.html', {'form':form})
 
+
 @login_required
-def tests(request):
+def scores(request):
     user = request.user.username
-    return render(request, 'tests.html', {'user':user})
+    found, data, labels = False, [], []
+    score = TestB.objects.filter(user__exact = request.user)
+    if score:
+        for s in score:
+            data = [s.o, s.c, s.e, s.a, s.n]
+            labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
+        found = True
+    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found }
+    return render(request, 'scores.html',context)
 
 @login_required
 def profile(request):
@@ -59,6 +56,11 @@ def profile(request):
         form = ProfileUpdateForm(instance=request.user.profile)
     context = {'user' : user, 'form' : form}
     return render(request, 'profile.html', context)
+
+@login_required
+def tests(request):
+    user = request.user.username
+    return render(request, 'tests.html', {'user':user})
 
 @login_required
 def testA(request):
@@ -93,6 +95,20 @@ def testB(request):
         form = TestBForm()
     context = {'user' : user, 'form' : form, 'q': q}
     return render(request, 'TestB.html', context)
+
+@login_required
+def testC(request):
+    user = request.user.username
+    if request.method == 'POST':
+        form = TestCForm(request.POST)
+        if form.is_valid():
+            form.process()
+            messages.success(request, f'Your profile details has been processed.')
+            return redirect('tests')
+    else:
+        form = TestCForm()
+    context = {'user' : user, 'form' : form}
+    return render(request, 'TestC.html', context)
         
 
 @login_required

@@ -3,18 +3,22 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from django.conf import settings
+import os
 import time
 import json
 import pandas
 
-from credentials import username,password
+
+#from credentials import username,password
 posts_scraped = []
 
 class fb_bot():
     def __init__(self):
+        driver_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestC/chromedriver.exe')
         options = webdriver.ChromeOptions()
         options.add_argument('--disable-notifications')
-        self.driver = webdriver.Chrome('./chromedriver.exe', chrome_options=options)
+        self.driver = webdriver.Chrome(driver_path, chrome_options=options)
 
 
     def login(self,username,password):        
@@ -64,19 +68,21 @@ class fb_bot():
 
     def convert_to_json(self,post):   
         data = post
-        # save the data
-        with open('my_data.json', 'w') as out_f:
+        json_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestC/my_data.json')
+        with open(json, 'w') as out_f:
             json.dump(data, out_f)
 
     def convert_to_csv(self,post):
         list1 = [i+1 for i in range(len(post))]
         df = pandas.DataFrame(data={"col1": list1, "col2": post})
-        df.to_csv("./file.csv", sep=',',index=False)
+        csv_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestC/file.csv')
+        df.to_csv(csv_path, sep=',',index=False)
+        self.driver.close()
 
 
-bot = fb_bot()
-bot.login(username,password)
-posts_scraped = bot.post_scraping()
-posts_scraped = bot.remove_blank(posts_scraped)
-bot.convert_to_json(posts_scraped)
-bot.convert_to_csv(posts_scraped)
+# bot = fb_bot()
+# bot.login(username,password)
+# posts_scraped = bot.post_scraping()
+# posts_scraped = bot.remove_blank(posts_scraped)
+# bot.convert_to_json(posts_scraped)
+# bot.convert_to_csv(posts_scraped)
