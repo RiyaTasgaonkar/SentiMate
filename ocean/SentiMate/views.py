@@ -8,6 +8,7 @@ from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, Te
 from .TestB import questions
 from .TestA import questionsA
 from .models import TestB, TestA
+import time
 
 
 # Create your views here.
@@ -73,6 +74,7 @@ def testA(request):
             instance = TestA(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
             instance.save()
             messages.success(request, f'Your response for test A has been saved.')
+            time.sleep(5)
             return redirect('tests')
     else:
         form = TestAForm()

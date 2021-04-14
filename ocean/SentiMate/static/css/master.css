@@ -145,3 +145,31 @@ footer{
     color: #212529;
     text-align: left;
 }
+
+#spinner{
+    display: none;
+    text-align: center !important;
+    z-index: 1000;
+}
+
+.spinner-border{
+    border: 16px solid #fefefe; /* Light grey */
+    border-top: 16px solid var(--blue); /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading {
+    background: red;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
