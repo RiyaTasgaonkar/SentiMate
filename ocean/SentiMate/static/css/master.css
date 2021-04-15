@@ -150,6 +150,8 @@ footer{
     display: none;
     text-align: center !important;
     z-index: 1000;
+    animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
 }
 
 .spinner-border{
@@ -162,9 +164,11 @@ footer{
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+    to { -webkit-transform: rotate(360deg); }
+  }
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
 
 #loading {
     background: red;
