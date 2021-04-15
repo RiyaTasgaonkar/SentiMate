@@ -56,12 +56,12 @@ class TestAForm(forms.Form):
 	def __init__(self, *args, **kwargs):
 		super(TestAForm, self).__init__(*args, **kwargs)
 		questions, ANSWER_CHOICES = questionsA.get_questions_and_options()
-		for i in range(0, 5):
+		for i in range(0, 10):
 			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], widget=forms.RadioSelect(),help_text = questions[i])
 
 	def process(self):
-		ocean = [0, 0, 0, 0, 0]
-		for i in range(5):
+		ocean = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		for i in range(10):
 			x = int(self.cleaned_data['Question' + str(i)])
 			ocean[x - 1] = ocean[x-1] +20
 		return ocean
