@@ -1,4 +1,5 @@
 from django import forms
+from django.forms inport PasswordInput
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
@@ -67,7 +68,7 @@ class TestAForm(forms.Form):
 
 class TestCForm(forms.Form):
 	username = forms.CharField()
-	password = forms.CharField()
+	password = forms.CharField(widget=PasswordInput())
 
 	def process(self):
 		username, password = self.cleaned_data['username'], self.cleaned_data['password']
