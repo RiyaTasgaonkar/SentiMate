@@ -60,10 +60,14 @@ class TestAForm(forms.Form):
 			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], help_text = questions[i])
 
 	def process(self):
-		ocean = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		scores, ocean = [], []
 		for i in range(10):
 			x = int(self.cleaned_data['Question' + str(i)])
-			ocean[x - 1] = ocean[x-1] +20
+			scores.append(x)
+			if i%2 == 1:
+				print(i)
+				t = scores[i - 1] + scores[i]
+				ocean.append(int(np.round(t/6*100, 2)))
 		return ocean
 
 class TestCForm(forms.Form):
