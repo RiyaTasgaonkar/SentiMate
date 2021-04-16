@@ -108,18 +108,13 @@ The above copyright notice and this permission notice shall be included in all c
                     {% csrf_token %}
                     <fieldset class="form-group">
                       {% for field in form.visible_fields %}<br>
-                      <div class="row my-3">
+                      <div class="row my-1">
                         {{ field.errors }}
                         {{ field.help_text }}
                         </div>
                         <br>
-                        <div class="row my-3" style="text-align: left;">
-                        {% for radio in field %}
-                        <label for="{{ radio.id_for_label }}" class="px-2 mx-2">
-                        {{ radio.choice_label }}
-                        <span class="radio-A">{{ radio.tag }}</span>
-                        </label>
-                        {% endfor %}
+                        <div class="row my-2" style="text-align: left;">
+                        {{ field}}
                       </div>
                       {% endfor %}
                     </fieldset>

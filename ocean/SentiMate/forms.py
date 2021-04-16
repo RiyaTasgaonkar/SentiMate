@@ -57,7 +57,7 @@ class TestAForm(forms.Form):
 		super(TestAForm, self).__init__(*args, **kwargs)
 		questions, ANSWER_CHOICES = questionsA.get_questions_and_options()
 		for i in range(0, 10):
-			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], widget=forms.RadioSelect(),help_text = questions[i])
+			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], help_text = questions[i])
 
 	def process(self):
 		ocean = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
