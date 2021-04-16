@@ -20,7 +20,7 @@ options = [
     ((1,'I dont know what I am doing today evening'), (2,'I do plan same events but it it quite possible that i might deviate from my plans'),(3,'I plan everything and manage to complete all activities before deadline.')),
     ((1,'I will prefer to be alone'), (2,'Nah I will find talk to only those who talk to me.'),(3,'Will go and talk to everyone')),
     ((1,'I prefer staying at home'), (2,'Will decide depending on the place and who all are coming'),(3,'Will immediately respond with yes')),
-    ((1,'You feel it if okay if you are late or have a valid reason.'), (2,'You have at times but you know that is it the best portrayal of your behaviour'),(3,'Never as you do not beileve that is is morally right')),
+    ((1,'You feel it if okay if you are late or have a valid reason.'), (2,'You have at times but you know that is it the best portrayal of your behaviour'),(3,'Never as you do not believe that is is morally right')),
     ((1,' No I would try to avoid him/her saying I have some other work'), (2,' I will not stay awake the entire night but for some time.'),(3,' Will stay up an entire night for the friend')),
     ((1,'You wont let such thoughts affect you and are completely relaxed.'), (2,'A bit tensed but you know you will manage to give your best'),(3,'You are not at all worried about the big event')),
     ((1,' Not too much but also not much less'), (2,'Rarely '),(3,'Very often')),
