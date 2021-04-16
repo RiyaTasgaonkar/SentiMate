@@ -12,6 +12,7 @@ import pickle
 import os
 import pandas as pd
 import numpy as np
+import time
 
 class UserRegisterForm(UserCreationForm):
 	class Meta:
@@ -60,6 +61,7 @@ class TestAForm(forms.Form):
 			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], help_text = questions[i])
 
 	def process(self):
+		time.sleep(4)
 		scores, ocean = [], []
 		for i in range(10):
 			x = int(self.cleaned_data['Question' + str(i)])
