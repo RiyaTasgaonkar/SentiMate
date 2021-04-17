@@ -98,9 +98,8 @@ The above copyright notice and this permission notice shall be included in all c
   <div class="main main-raised mb-5">
     <div class="container">
       <div class="section text-center">
-        {% if user.profile.profile_pic %}
-          <img src = "{{ user.profile.profile_pic.url }}"> 
-        
+        {% if request.user.profile.profile_pic %}
+          <img src = "{{ request.user.profile.profile_pic.url }}" alt="your-picture" height="50px; width=50px"> 
         {% else %}
           <img src = "{% static 'Sentimate/images/default_pic.png' %}">
         {% endif %} 

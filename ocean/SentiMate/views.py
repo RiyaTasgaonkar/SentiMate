@@ -8,6 +8,8 @@ from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, Te
 from .TestB import questions
 from .TestA import questionsA
 from .models import TestB, TestA, TestC
+from django.conf import settings
+import os
 
 
 # Create your views here.
