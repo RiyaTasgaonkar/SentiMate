@@ -56,3 +56,18 @@ class TestB(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+class TestC(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
+    o = models.IntegerField(blank=False)
+    c = models.IntegerField(blank=False)
+    e = models.IntegerField(blank=False)
+    a = models.IntegerField(blank=False)
+    n = models.IntegerField(blank=False)
+
+    def __str__(self):
+        return f'{self.user.username} TestC'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)

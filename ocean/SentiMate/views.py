@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm
 from .TestB import questions
 from .TestA import questionsA
-from .models import TestB, TestA
+from .models import TestB, TestA, TestC
 
 
 # Create your views here.
@@ -102,8 +102,11 @@ def testC(request):
     if request.method == 'POST':
         form = TestCForm(request.POST)
         if form.is_valid():
-            form.process()
-            messages.success(request, f'Your profile details has been processed.')
+            ocean = form.process()
+            print(ocean)
+            instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+            instance.save()
+            messages.success(request, f'Your response for test C has been saved.')
             return redirect('tests')
     else:
         form = TestCForm()

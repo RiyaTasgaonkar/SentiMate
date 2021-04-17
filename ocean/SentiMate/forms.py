@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from .TestB import questions
 from .TestA import questionsA
-from .TestC import facebook_scrapper
+from .TestC import facebook_scrapper, predict
 from django.core.files import File
 from django.conf import settings
 import pickle
@@ -73,6 +73,7 @@ class TestCForm(forms.Form):
 	username = forms.CharField()
 	password = forms.CharField(widget=PasswordInput())
 
+
 	def process(self):
 		username, password = self.cleaned_data['username'], self.cleaned_data['password']
 		bot = facebook_scrapper.fb_bot()
@@ -80,4 +81,5 @@ class TestCForm(forms.Form):
 		posts_scraped = bot.post_scraping()
 		posts_scraped = bot.remove_blank(posts_scraped)
 		bot.convert_to_csv(posts_scraped)
-
+		ocean = predict.predict()
+		return ocean
