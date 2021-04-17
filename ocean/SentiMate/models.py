@@ -19,7 +19,7 @@ class Profile(models.Model):
     instagram = models.URLField(blank=True)
     gender = models.CharField(max_length = 20, choices = GENDER_CHOICES, default = Male)
     bio = models.TextField(max_length=250, blank=False)
-    # image = models.ImageField(default = 'default.jpg' , upload_to = "profile_pics")
+    profile_pic = models.ImageField(null = True , blank = True , upload_to = "images/profile_pics/")
 
     def __str__(self):
         return f'{self.user.username} Profile'

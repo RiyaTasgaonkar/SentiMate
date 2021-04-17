@@ -21,7 +21,7 @@ class UserRegisterForm(UserCreationForm):
 class ProfileUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Profile
-		fields = ['name', 'emailid', 'facebook', 'linkedin', 'instagram', 'gender', 'bio']
+		fields = ['name', 'emailid', 'facebook', 'linkedin', 'instagram', 'gender', 'bio','profile_pic']
 
 class TestBForm(forms.Form):
 	
