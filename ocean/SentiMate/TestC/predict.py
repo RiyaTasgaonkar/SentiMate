@@ -23,10 +23,10 @@ def model_predict(posts, length):
 def predict():
     csv_path = os.path.join(settings.BASE_DIR, 'SentiMate/TestC/file.csv')
     posts = pd.read_csv(csv_path)
-    length = posts.shape[1]
+    length = posts.shape[0]
     if length > 10:
         length = 10
-        posts = posts.head(10)
+        posts = pd.DataFrame(posts.head(10))
     posts = posts[posts.columns[1]]
     ocean = model_predict(posts, length)
     return ocean
