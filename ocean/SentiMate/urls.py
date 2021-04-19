@@ -17,4 +17,4 @@ urlpatterns = [
     path('testB',views.testB, name='testB'),
     path('testA',views.testA, name='testA'),
     path('testC',views.testC, name='testC'),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

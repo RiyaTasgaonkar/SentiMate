@@ -41,9 +41,14 @@ input:focus, select:focus, textarea:focus{
     border-color: var(--blue) !important;
 }
 
-input[type="radio"] {
-    height: 0.75rem !important;
+.checkbox{
+    display: inline !important;
+    height: auto;
+    position: relative !important;
+    vertical-align: middle !important;
+    height: 10px;
 }
+
 
 .alert-dark{
     color: var(--dark-gray) !important;

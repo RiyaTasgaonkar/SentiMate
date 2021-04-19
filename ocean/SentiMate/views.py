@@ -49,7 +49,7 @@ def scores(request):
 def profile(request):
     user = request.user.username
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, instance=request.user.profile)
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
             messages.success(request, f'Information updated successfully!')
