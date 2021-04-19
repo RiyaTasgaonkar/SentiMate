@@ -10,6 +10,7 @@ from .TestA import questionsA
 from .models import TestB, TestA, TestC
 from django.conf import settings
 import os
+import numpy as np
 
 
 # Create your views here.
@@ -35,14 +36,22 @@ def register(request):
 @login_required
 def scores(request):
     user = request.user.username
-    found, data, labels = False, [], []
-    score = TestB.objects.filter(user__exact = request.user)
-    if score:
-        for s in score:
-            data = [s.o, s.c, s.e, s.a, s.n]
+    found, data, labels = False, [0, 0, 0, 0, 0], []
+    scoreA = TestA.objects.filter(user__exact = request.user)
+    scoreB = TestB.objects.filter(user__exact = request.user)
+    scoreC = TestC.objects.filter(user__exact = request.user)
+    if scoreA and scoreB and scoreC:
+        for sA, sB, sC in zip(scoreA, scoreB, scoreC):
+            data[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
+            data[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
+            data[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
+            data[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
+            data[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
             labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
+            o,c,e,a,n = [data[0], 100-data[0]], [data[1], 100-data[1]], [data[2], 100-data[2]], [data[3], 100-data[3]], [data[4], 100-data[4]]
         found = True
-    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found }
+    print(data)
+    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found, 'o':o, 'c':c,'e':e, 'a':a, 'n':n}
     return render(request, 'scores.html',context)
 
 @login_required

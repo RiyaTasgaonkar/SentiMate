@@ -99,7 +99,38 @@ The above copyright notice and this permission notice shall be included in all c
     <div class="container">
       <div class="section text-center">
         {% if found %}
-        <p class="h4">Here is your result.<br>Please node the maximum score for each trait is 100.</p>
+        <p class="h4">Here is your result.<br>Please note the maximum score for each trait is 100.</p>
+        <div class=row>
+          <div class="col-md-4">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+              <canvas id="O-chart"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+              <canvas id="C-chart"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+              <canvas id="E-chart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="row mx-auto">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+              <canvas id="A-chart"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+              <canvas id="N-chart"></canvas>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
@@ -108,7 +139,7 @@ The above copyright notice and this permission notice shall be included in all c
           </div>
           <div class="col-md-6">
             <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
-              <canvas id="pie-chart-new"></canvas>
+              <canvas id="radar"></canvas>
             </div>
           </div>
         </div>
@@ -129,55 +160,24 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </footer>
   <!--   Core JS Files   -->
+    
   <script>
-    new Chart(document.getElementById("pie-chart"), {
-      type: 'bar',
+    new Chart(document.getElementById("O-chart"), {
+      type: 'doughnut',
       data: {
-        labels: {
-          {
-            labels | safe
-          }
-        },
-        datasets: [{
-          backgroundColor: ["#ff595e", "#1928c4", "#ffca3a", "#8ac926", "#6a4c93"],
-          data: {
-            {
-              data | safe
-            }
-          }
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-        },
-        legend: {
-          display: false,
+        labels: ["Openness", "not scored"],
+        datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#ff595e","#40404060"],
+          data: {{ o|safe }}  
         }
-      }
-    });
-  </script>
-  <script>
-    new Chart(document.getElementById("pie-chart-new"), {
-      type: 'radar',
-      data: {
-        labels: {
-          {
-            labels | safe
-          }
-        },
-        datasets: [{
-          // label: "Population (millions)",
-          backgroundColor: ["#1928c460"],
-          data: {
-            {
-              data | safe
-            }
-          }
-        }]
+        ]
       },
       options: {
         cutoutPercentage: 90,
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
         title: {
           display: false,
         },
@@ -187,6 +187,159 @@ The above copyright notice and this permission notice shall be included in all c
       }
     });
   </script>
+  <script>
+    new Chart(document.getElementById("C-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Openness", "not scored"],
+        datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#1928c4","#40404060"],
+          data: {{ c|safe }}  
+        }
+        ]
+      },
+      options: {
+        cutoutPercentage: 90,
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
+        title: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
+  </script>
+  <script>
+    new Chart(document.getElementById("E-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Openness", "not scored"],
+        datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#ffca3a","#40404060"],
+          data: {{ e|safe }}  
+        }
+        ]
+      },
+      options: {
+        cutoutPercentage: 90,
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
+        title: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
+  </script>
+  <script>
+    new Chart(document.getElementById("A-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Openness", "not scored"],
+        datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#8ac926","#40404060"],
+          data: {{ a|safe }}  
+        }
+        ]
+      },
+      options: {
+        cutoutPercentage: 90,
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
+        title: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
+  </script>
+  <script>
+    new Chart(document.getElementById("N-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Openness", "not scored"],
+        datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#6a4c93","#40404060"],
+          data: {{ n|safe }}  
+        }
+        ]
+      },
+      options: {
+        cutoutPercentage: 90,
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
+        title: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        }
+      }
+    });
+  </script>
+  
+  <script>
+  new Chart(document.getElementById("pie-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: {{ labels|safe }},
+      datasets: [
+      {
+        label: "Population (millions)",
+        backgroundColor: ["#ff595e", "#1928c4", "#ffca3a", "#8ac926", "#6a4c93"],
+        data: {{ data|safe }}
+      }
+      ]
+    },
+    options: {
+      cutoutPercentage: 90,
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+      }
+    }
+  });
+</script>
+<script>
+  new Chart(document.getElementById("radar"), {
+    type: 'radar',
+    data: {
+      labels: {{ labels|safe }},
+      datasets: [
+      {
+        label: "Population (millions)",
+        backgroundColor: ["#ff595e80", "#1928c480", "#ffca3a80", "#8ac92680", "#6a4c9380"],
+        data: {{ data|safe }}
+      }
+      ]
+    },
+    options: {
+      cutoutPercentage: 90,
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+      }
+    }
+  });
+</script>
 
 
   <script src="{% static 'js/core/jquery.min.js' %}" type="text/javascript"></script>
