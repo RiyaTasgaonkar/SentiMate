@@ -24,6 +24,10 @@ class ProfileUpdateForm(forms.ModelForm):
 		model = Profile
 		fields = ['name', 'emailid', 'facebook', 'linkedin', 'instagram', 'gender', 'bio', 'profile_pic']
 
+class CompareForm(forms.Form):
+   query=forms.CharField(max_length = 100)
+
+
 class TestBForm(forms.Form):
 	
 	def __init__(self, *args, **kwargs):
