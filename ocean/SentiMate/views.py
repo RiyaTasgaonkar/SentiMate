@@ -4,13 +4,19 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm, TestC1Form
+=======
+from django.contrib.auth.models import User
+from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm, CompareForm
+>>>>>>> e982e556b24a1c82fbc10244aae4480a5dbc01ef
 from .TestB import questions
 from .TestA import questionsA
 from .TestC import questionsC
 from .models import TestB, TestA, TestC, TestC1
 from django.conf import settings
 import os
+import numpy as np
 
 
 # Create your views here.
@@ -36,14 +42,22 @@ def register(request):
 @login_required
 def scores(request):
     user = request.user.username
-    found, data, labels = False, [], []
-    score = TestB.objects.filter(user__exact = request.user)
-    if score:
-        for s in score:
-            data = [s.o, s.c, s.e, s.a, s.n]
+    found, data, labels = False, [0, 0, 0, 0, 0], []
+    scoreA = TestA.objects.filter(user__exact = request.user)
+    scoreB = TestB.objects.filter(user__exact = request.user)
+    scoreC = TestC.objects.filter(user__exact = request.user)
+    if scoreA and scoreB and scoreC:
+        for sA, sB, sC in zip(scoreA, scoreB, scoreC):
+            data[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
+            data[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
+            data[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
+            data[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
+            data[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
             labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
+            o,c,e,a,n = [data[0], 100-data[0]], [data[1], 100-data[1]], [data[2], 100-data[2]], [data[3], 100-data[3]], [data[4], 100-data[4]]
         found = True
-    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found }
+    print(data)
+    context =  { 'labels': labels, 'data': data, 'user':user, 'found':found, 'o':o, 'c':c,'e':e, 'a':a, 'n':n}
     return render(request, 'scores.html',context)
 
 @login_required
@@ -59,6 +73,49 @@ def profile(request):
         form = ProfileUpdateForm(instance=request.user.profile)
     context = {'user' : user, 'form' : form}
     return render(request, 'profile.html', context)
+
+@login_required
+def compare(request):
+    user = request.user.username
+    valid, found, get, data_user, data_compare, labels, user_attempt, compare_attempt = False, False, True, [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [], False, False
+    if request.method == "POST":
+        get = False
+        form = CompareForm(request.POST)  
+        if  form.is_valid():
+            query =  form.cleaned_data['query']
+            comparison = User.objects.filter(username__iexact=query[0:]).first()
+            if comparison:  
+                found = True
+                scoreA_user = TestA.objects.filter(user__exact = request.user)
+                scoreB_user = TestB.objects.filter(user__exact = request.user)
+                scoreC_user = TestC.objects.filter(user__exact = request.user)
+                scoreA_compare = TestA.objects.filter(user__exact = comparison)
+                scoreB_compare = TestB.objects.filter(user__exact = comparison)
+                scoreC_compare = TestC.objects.filter(user__exact = comparison)
+                if scoreA_user and scoreB_user and scoreC_user:
+                    for sA, sB, sC in zip(scoreA_user, scoreB_user, scoreC_user):
+                        data_user[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
+                        data_user[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
+                        data_user[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
+                        data_user[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
+                        data_user[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
+                        user_attempt = True
+                        labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
+                if scoreA_compare and scoreB_compare and scoreC_compare:
+                    for sA, sB, sC in zip(scoreA_compare, scoreB_compare, scoreC_compare):
+                        data_compare[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
+                        data_compare[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
+                        data_compare[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
+                        data_compare[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
+                        data_compare[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
+                        compare_attempt = True
+                return render(request, 'compare.html', {'user':user, 'form':form, 'get':get, 'found':found, 'user_attempt':user_attempt, 'compare_attempt':compare_attempt, 'data_user': data_user, 'data_compare': data_compare, 'labels':labels, 'comparison':comparison})                             
+            else:
+                return render(request, 'compare.html', {'user':user, 'form':form, 'get':get, 'found':found})
+
+    else:
+        form = CompareForm()
+        return render(request, 'compare.html', {'user':user, 'form':form, 'get':get})
 
 @login_required
 def tests(request):

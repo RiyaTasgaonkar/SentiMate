@@ -24,7 +24,16 @@ class ProfileUpdateForm(forms.ModelForm):
 		model = Profile
 		fields = ['name', 'emailid', 'facebook', 'linkedin', 'instagram', 'gender', 'bio', 'profile_pic']
 
+<<<<<<< HEAD
 class TestBForm(forms.Form):	
+=======
+class CompareForm(forms.Form):
+   query=forms.CharField(max_length = 100)
+
+
+class TestBForm(forms.Form):
+	
+>>>>>>> e982e556b24a1c82fbc10244aae4480a5dbc01ef
 	def __init__(self, *args, **kwargs):
 		super(TestBForm, self).__init__(*args, **kwargs)
 		ANSWER_CHOICES = ((1,1), (2,2),(3,3), (4,4), (5,5))
@@ -60,7 +69,11 @@ class TestAForm(forms.Form):
 			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], help_text = questions[i])
 
 	def process(self):
+<<<<<<< HEAD
 		time.sleep(4)
+=======
+		time.sleep(3)
+>>>>>>> e982e556b24a1c82fbc10244aae4480a5dbc01ef
 		scores, ocean = [], []
 		for i in range(10):
 			x = int(self.cleaned_data['Question' + str(i)])
@@ -83,6 +96,7 @@ class TestCForm(forms.Form):
 		bot.convert_to_csv(posts_scraped)
 		ocean = predict.predict()
 		return ocean
+<<<<<<< HEAD
 
 
 class TestC1Form(forms.Form):
@@ -104,3 +118,5 @@ class TestC1Form(forms.Form):
 		scores = predict.model_predict(ocean,len(ocean))
 		return scores
 		
+=======
+>>>>>>> e982e556b24a1c82fbc10244aae4480a5dbc01ef
