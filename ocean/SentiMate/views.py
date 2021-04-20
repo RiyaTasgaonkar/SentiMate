@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm
+from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, TestCForm, TestC1Form
 from .TestB import questions
 from .TestA import questionsA
-from .models import TestB, TestA, TestC
+from .TestC import questionsC
+from .models import TestB, TestA, TestC, TestC1
 from django.conf import settings
 import os
 
@@ -115,6 +116,23 @@ def testC(request):
     context = {'user' : user, 'form' : form}
     return render(request, 'TestC.html', context)
         
+@login_required
+def testC1(request):
+    user = request.user.username
+    q = list(questionsC.get_values_for_questions())
+    if request.method == 'POST':
+        form = TestC1Form(request.POST)
+        if  form.is_valid():
+            ocean = form.process()
+            instance = TestC1(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+            instance.save()
+            messages.success(request, f'Your response for test C1 has been saved.')
+            return redirect('tests')
+    else:
+        form = TestC1Form()
+    context = {'user' : user, 'form' : form, 'q': q}
+    return render(request, 'TestC1.html', context)
+
 
 @login_required
 def logout_view(request):

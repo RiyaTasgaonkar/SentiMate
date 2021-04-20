@@ -30,7 +30,6 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
-
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
   <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
@@ -94,52 +93,58 @@ The above copyright notice and this permission notice shall be included in all c
   <div class="main main-raised mb-5">
     <div class="container">
       <div class="section text-center">
-        <p class="h4">Please enter your credentials for your facebook account to detect your traits based on your social media activity.</p><br>
-        <div class="container">
-          <div class="col-md-10 mx-auto">
-            <div class="row">
-                <div class="col-md-6 order-sm-1 order-md-2 ml-auto px-3 py-5">
-                    <img src="{% static 'img/facebook.svg'%}" alt="social-image" style="width: 100%;">
+        <div class = "container" id = "formContainer">
+          <p class="h4">Below are given some scenarios. Describe your actions and thoughts for each of them.</p><br>
+          <div class="container">
+            <div class="col-md-9 mx-auto">
+              <!-- <p style="text-align:left">1 - Strongly Disagree; 3 - Neutral; 5 - Strongly Agree</p><br><br> -->
+              <div class="row">
+                <div class="card" style="text-align:left">
+                  <div class="card-header card-header-blue text-center">
+                    <h4 class="card-title">Attempt Test</h4>
                   </div>
-                  <div class="col-md-6 order-sm-2 order-md-1 mx-auto px-3" style="margin: 2rem 0;" id="formContainer">
-                    <div class="card">
-                      <div class="card-header card-header-blue text-center">
-                        <h4 class="card-title">Enter Credentials</h4>
-                      </div>
-                      <div class="card-body" style="text-align: left;">
-                        <form method="POST" id="#test-form">
-                          {% csrf_token %}
-                          <fieldset class="form-group">
-                            {{ form.as_p }}
-                          </fieldset>
-                          <div class="form-group">
-                            <button class="btn btn-primary btn-round btn-blue" type="submit">Submit</button>
+                  <div class="card-body">
+                    <form method="POST">
+                      {% csrf_token %}
+                      <fieldset class="form-group">
+                        {% for field in form.visible_fields %}<br>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            {{ field.errors }}
+                            {{ field.help_text }}
                           </div>
-                          <div class = "container">
-                            <br><p class = "text-muted">Don't have a social media account ?<br> Click here for alternate test.</p>
-                              &nbsp;&nbsp;&nbsp;<a href="{% url 'testC1' %}" class="btn btn-primary btn-round btn-blue" >Next</a>
+                          <div class="col-sm-12 mx-auto">
+                            {% for text in field %}
+                              <span class="textarea">{{ text.tag }}</span>                            
+                            {% endfor %}
                           </div>
-                        </form>
+                        </div>
+                        {% endfor %}
+                      </fieldset>
+                      <div class="form-group">
+                        <button class="btn btn-primary btn-round btn-blue" type="submit">Save</button>
                       </div>
-                    </div>
-                    </div>
-                    <div class="col-md-6 order-sm-2 order-md-1 ml-auto px-5 py-5" id = "spinner">
-                      <p class="h5">Processing your responses please wait. This may take a few minutes.</p>          
-                      <div class="spin mx-auto my-5" role="status">
-                    </div>
+                    </form>
                   </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="container" id = "spinner">
+          <p class="h5">Processing your responses please wait..</p>          
+          <div class="spin mx-auto my-5" role="status">
+          </div>          
+        </div>
+      </div>      
     </div>
   </div>
-  </div>
-
   <footer class="container-fluid">
     <div class="row mx-auto">
       <div class="py-1" style="color: #f5eded;"> Made with <i class="fas fa-heart" style="color: #ff595e;"></i> by RNA</div>
     </div>
   </footer>
+
   <!--   Core JS Files   -->
   <script type="text/javascript">
     $(document).ready(function(){
@@ -149,6 +154,7 @@ The above copyright notice and this permission notice shall be included in all c
       });
     });
   </script>
+  
   <script src="{% static 'js/core/jquery.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>
