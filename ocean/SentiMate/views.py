@@ -37,7 +37,7 @@ def register(request):
 @login_required
 def scores(request):
     user = request.user.username
-    found, data, labels = False, [0, 0, 0, 0, 0], []
+    found, data, labels, o, c, e, a, n = False, [0, 0, 0, 0, 0], [], None, None, None, None, None 
     scoreA = TestA.objects.filter(user__exact = request.user)
     scoreB = TestB.objects.filter(user__exact = request.user)
     scoreC = TestC.objects.filter(user__exact = request.user)
@@ -51,7 +51,6 @@ def scores(request):
             labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
             o,c,e,a,n = [data[0], 100-data[0]], [data[1], 100-data[1]], [data[2], 100-data[2]], [data[3], 100-data[3]], [data[4], 100-data[4]]
         found = True
-    print(data)
     context =  { 'labels': labels, 'data': data, 'user':user, 'found':found, 'o':o, 'c':c,'e':e, 'a':a, 'n':n}
     return render(request, 'scores.html',context)
 
