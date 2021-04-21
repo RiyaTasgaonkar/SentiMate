@@ -132,12 +132,19 @@ The above copyright notice and this permission notice shall be included in all c
             <p class="h4">{{ comparison }} hasn't attempted the tests. Please try again some time later.</p>
             <img src="{% static 'img/no results.svg'%}" alt="no result" class="my-3 mx-auto" style="height:20rem; width:20rem">
             {% else %}
+            <p class='h4'>Comparison Results</p>
             <div class="row">
                 <div class="col-md-6">
                     <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
                         <canvas id="bar-chart"></canvas>
                     </div>
-                </div>
+                    </div>
+                    <div class="col-md-6">
+                  <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+                      <canvas id="radar-chart"></canvas>
+                  </div>
+                  </div>
+              </div>
             </div>
             {% endif %}
             {% endif %}
@@ -155,19 +162,19 @@ The above copyright notice and this permission notice shall be included in all c
   </footer>
   <!--   Core JS Files   -->
   <script>
-    new Chart(document.getElementById("bar-chart"), {
+    var bar = new Chart(document.getElementById("bar-chart"), {
       type: 'bar',
       data: {
         labels: {{ labels|safe }},
         datasets: [
         {
-          label: "Your Scores",
-          backgroundColor: ["#ff595e"],
+          label: "Your Score",
+          backgroundColor: ["#ff595e", "#ff595e", "#ff595e", "#ff595e", "#ff595e"],
           data: {{ data_user|safe }}  
         },
         {
-          label: "{{ comparison }} Scores",
-          backgroundColor: ["#40404080"],
+          label: "{{ comparison }}\'s Score",
+          backgroundColor: ["#40404080", "#40404080", "#40404080","#40404080", "#40404080"],
           data: {{ data_compare|safe }}  
         }
         ]
@@ -180,11 +187,48 @@ The above copyright notice and this permission notice shall be included in all c
           display: false,
         },
         legend: {
-          display: false,
+          display: true,
         }
       }
     });
   </script>
+  <script>
+    var radar = new Chart(document.getElementById("radar-chart"),{
+      type: 'radar',
+      data: {
+        labels: {{ labels|safe }},
+        datasets: [{
+          label: "Your score",
+          data: {{ data_user|safe }},
+          fill: true,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(255, 99, 132)'
+        }, {
+          label: '{{ comparison }}\'s score',
+          data: {{ data_compare|safe }},
+          fill: true,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgb(54, 162, 235)',
+          pointBackgroundColor: 'rgb(54, 162, 235)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(54, 162, 235)'
+        }]
+      },
+      options: {
+        elements: {
+          line: {
+            borderwidth: 3,
+          }
+        }
+      },
+    });
+  </script>
+
   <script src="{% static 'js/core/jquery.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>
