@@ -109,11 +109,11 @@ The above copyright notice and this permission notice shall be included in all c
                       <fieldset class="form-group">
                         {% for field in form.visible_fields %}<br>
                         <div class="row">
-                          <div class="col-sm-12">
+                          <div class="col-sm-12 mb-2">
                             {{ field.errors }}
                             {{ field.help_text }}
                           </div>
-                          <div class="col-sm-12 mx-auto">
+                          <div class="col-sm-12 mx-auto mb-2">
                             {% for text in field %}
                               <span class="textarea">{{ text.tag }}</span>                            
                             {% endfor %}

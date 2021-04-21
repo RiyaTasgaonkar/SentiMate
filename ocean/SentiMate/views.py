@@ -179,7 +179,7 @@ def testC1(request):
             ocean = form.process()
             instance = TestC1(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
             instance.save()
-            messages.success(request, f'Your response for test C1 has been saved.')
+            messages.success(request, f'Your response for test C has been saved.')
             return redirect('tests')
     else:
         form = TestC1Form()
