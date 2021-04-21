@@ -59,12 +59,12 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{% url 'scores' %}">
               Results
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{% url 'compare' %}">
               Compare
             </a>
           </li>
@@ -101,67 +101,68 @@ The above copyright notice and this permission notice shall be included in all c
     <div class="container">
       <div class="section text-center">
         {% if found %}
-        <p class="h4">Here is your result.<br>Please note the maximum score for each trait is 100.</p>
-        <div class=row>
+        <p class="h4">{{ user }}'s result.</p>
+        <div class="row px-5 mx-5">
           <div class="col-md-4">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
               <!-- <canvas id="O-chart"></canvas> -->
               <div id="O-chart" style="width: 250px; height: 200px; margin: 20px;">
-                <h3 style="color: #ed6a5a; font-weight: normal; font-size: 25px;">Openness</h3>
+                <h3 style="color: #ff595e; font-weight: normal; font-size: 25px;">Openness</h3>
               </div>
-              <h5>Some text to describe openness</h5>
+              <h5>Includes traits like being insightful and imaginative</h5>
             </div>
           </div>
           <div class="col-md-4">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
               <!-- <canvas id="C-chart"></canvas> -->
               <div id="C-chart" style="width: 250px; height: 200px; margin:20px;">
-                <h3 style="color: #5b66e3; font-weight: normal; font-size: 25px;">Conscientiousness</h3>
+                <h3 style="color: #1928c4; font-weight: normal; font-size: 25px;">Conscientiousness</h3>
               </div>
-              <h5>Some text to describe conscientiousness</h5>
+              <h5>Tendency to control impulses and behaviors</h5>
             </div>
           </div>
           <div class="col-md-4">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
               <!-- <canvas id="E-chart"></canvas> -->
               <div id="E-chart" style="width: 250px; height: 200px; margin: 20px;">
-                <h3 style="color: #FFD86E; font-weight: normal; font-size: 25px;">Extraversion</h3>
+                <h3 style="color: #8ac926; font-weight: normal; font-size: 25px;">Extraversion</h3>
               </div>
-              <h5>Some text to describe Extraversion</h5>
+              <h5>Easures the level of sociability</h5>
             </div>
           </div>
         </div>
-        <div class="row mx-auto">
+        <div class="row mx-auto px-5 mx-5">
           <div class="col-md-2"></div>
           <div class="col-md-4">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
               <!-- <canvas id="A-chart"></canvas> -->
               <div id="A-chart" style="width: 250px; height: 200px; margin: 20px;">
-                <h3 style="color: #BAF757; font-weight: normal; font-size: 25px;">Agreeableness</h3>
+                <h3 style="color: #ffca3a; font-weight: normal; font-size: 25px;">Agreeableness</h3>
               </div>
-              <h5>Some text to describe Agreeableness</h5>
+              <h5>measures how well you get along with people</h5>
             </div>
           </div>
           <div class="col-md-4">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
               <!-- <canvas id="N-chart"></canvas> -->
               <div id="N-chart" style="width: 250px; height: 200px; margin: 20px;">
-                <h3 style="color: #A081DE; font-weight: normal; font-size: 25px;">Neuroticism</h3>
+                <h3 style="color: #6a4c93; font-weight: normal; font-size: 25px;">Neuroticism</h3>
               </div>
-              <h5>Some text to describe Neuroticism</h5>
+              <h5>Tendency to experience negative emotions like fear, sadness.</h5>
             </div>
           </div>
           <div class="col-md-2"></div>
         </div>
-        <p class='h4'>Overall Result</p>
-        <div class="row">
-          <div class="col-md-6">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+        <p class="h4" style="padding-top: 4rem;">Overall Result</p>
+        <div class="row my-3">
+          <div class="col-md-6 mx-auto">
+            <div id="container" class="mx-auto my-5">
               <canvas id="pie-chart"></canvas>
             </div>
           </div>
-          <div class="col-md-6">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+          
+          <div class="col-md-6 mx-auto">
+            <div id="container" class="mx-auto my-5">
               <canvas id="radar"></canvas>
             </div>
           </div>
@@ -188,7 +189,7 @@ The above copyright notice and this permission notice shall be included in all c
     // Chart for O  
     var bar = new ProgressBar.SemiCircle("#O-chart", {
     strokeWidth: 6,
-    color: '#ED6A5A',
+    color: '#ff595e',
     trailColor: '#eee',
     trailWidth: 1,
     easing: 'easeInOut',
@@ -198,8 +199,8 @@ The above copyright notice and this permission notice shall be included in all c
       value: '',
       alignToBottom: false
     },
-    from: {color: '#ED6A5A'},
-    to: {color: '#ED6A5A'},
+    from: {color: '#ff595e'},
+    to: {color: '#ff595e'},
     step: (state, bar) => {
       bar.path.setAttribute('stroke', state.color);
       var value = Math.round(bar.value() * 100);
@@ -223,7 +224,7 @@ The above copyright notice and this permission notice shall be included in all c
     // Chart for C
     var bar = new ProgressBar.SemiCircle("#C-chart", {
     strokeWidth: 6,
-    color: '#5B66E3',
+    color: '#1928c4',
     trailColor: '#eee',
     trailWidth: 1,
     easing: 'easeInOut',
@@ -233,8 +234,8 @@ The above copyright notice and this permission notice shall be included in all c
       value: '',
       alignToBottom: false
     },
-    from: {color: '#5B66E3'},
-    to: {color: '#5B66E3'},
+    from: {color: '#1928c4'},
+    to: {color: '#1928c4'},
     step: (state, bar) => {
       bar.path.setAttribute('stroke', state.color);
       var value = Math.round(bar.value() * 100);
@@ -258,7 +259,7 @@ The above copyright notice and this permission notice shall be included in all c
     //Chart for E
     var bar = new ProgressBar.SemiCircle("#E-chart", {
     strokeWidth: 6,
-    color: '#FCDA7C',
+    color: '#8ac926',
     trailColor: '#eee',
     trailWidth: 1,
     easing: 'easeInOut',
@@ -268,8 +269,8 @@ The above copyright notice and this permission notice shall be included in all c
       value: '',
       alignToBottom: false
     },
-    from: {color: '#FCDA7c'},
-    to: {color: '#FFD86E'},
+    from: {color: '#8ac926'},
+    to: {color: '#8ac926'},
     step: (state, bar) => {
       bar.path.setAttribute('stroke', state.color);
       var value = Math.round(bar.value() * 100);
@@ -293,7 +294,7 @@ The above copyright notice and this permission notice shall be included in all c
     //Chart for A
     var bar = new ProgressBar.SemiCircle("#A-chart", {
     strokeWidth: 6,
-    color: '#BAF757',
+    color: '#ffca3a',
     trailColor: '#eee',
     trailWidth: 1,
     easing: 'easeInOut',
@@ -303,8 +304,8 @@ The above copyright notice and this permission notice shall be included in all c
       value: '',
       alignToBottom: false
     },
-    from: {color: '#BAF757'},
-    to: {color: '#BAF757'},
+    from: {color: '#ffca3a'},
+    to: {color: '#ffca3a'},
     step: (state, bar) => {
       bar.path.setAttribute('stroke', state.color);
       var value = Math.round(bar.value() * 100);
@@ -327,7 +328,7 @@ The above copyright notice and this permission notice shall be included in all c
     //Chart for N
     var bar = new ProgressBar.SemiCircle("#N-chart", {
     strokeWidth: 6,
-    color: '#A081DE',
+    color: '#6a4c93',
     trailColor: '#eee',
     trailWidth: 1,
     easing: 'easeInOut',
@@ -337,8 +338,8 @@ The above copyright notice and this permission notice shall be included in all c
       value: '',
       alignToBottom: false
     },
-    from: {color: '#A081DE'},
-    to: {color: '#A081DE'},
+    from: {color: '#6a4c93'},
+    to: {color: '#6a4c93'},
     step: (state, bar) => {
       bar.path.setAttribute('stroke', state.color);
       var value = Math.round(bar.value() * 100);
@@ -364,14 +365,13 @@ The above copyright notice and this permission notice shall be included in all c
         labels: {{ labels|safe }},
         datasets: [
         {
-          //label: "Population (millions)",
           backgroundColor: ["#ff595e", "#1928c4", "#ffca3a", "#8ac926", "#6a4c93"],
           data: {{ data|safe }}
         }
         ]
       },
       options: {
-        cutoutPercentage: 50,
+        cutoutPercentage: 70,
         title: {
           display: false,
         },
@@ -389,20 +389,19 @@ The above copyright notice and this permission notice shall be included in all c
         datasets: [
         {
           label: "Your Trait Value",
-          backgroundColor: ["#ff595e80", "#1928c480", "#ffca3a80", "#8ac92680", "#6a4c9380"],
+          // backgroundColor: ["#ff595e80", "#1928c480", "#ffca3a80", "#8ac92680", "#6a4c9380"],
           data: {{ data|safe }},
           fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(25, 40, 196, 0.2)',
+          borderColor: 'rgb(55, 40, 196)',
+          pointBackgroundColor: 'rgb(55, 40, 196)',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
+          pointHoverBorderColor: 'rgb(55, 40, 196)'
         }
         ]
       },
       options: {
-        cutoutPercentage: 90,
         title: {
           display: false,
         },

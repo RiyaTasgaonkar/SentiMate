@@ -57,12 +57,12 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{% url 'scores' %}">
               Results
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{% url 'compare' %}">
               Compare
             </a>
           </li>
@@ -117,6 +117,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
             </div>
             </form>
+          </div>
             {% if get %}
             <img src="{% static 'img/search.svg'%}" alt="no result" class="my-3 mx-auto" style="height:20rem; width:20rem">
             {% else %}
@@ -133,19 +134,53 @@ The above copyright notice and this permission notice shall be included in all c
             <img src="{% static 'img/no results.svg'%}" alt="no result" class="my-3 mx-auto" style="height:20rem; width:20rem">
             {% else %}
             <p class='h4'>Comparison Results</p>
+            <div class="mx-auto my-4" style="text-align: center;">
+              <div class="col-md-8 mx-auto">
+              <div class="card text-left">
+                <div class="card-body">
+                  <h4 class="card-title">{{ comparison.profile.name }}</h4>
+                  <div class="row mx-auto">
+                    <div class="col-md-4">
+                      {% if request.user.profile.profile_pic %}
+                        <img src = "{{ comparison.profile.profile_pic.url }}" alt="your-picture" class="img-raised rounded-circle img-fluid mx-auto" style="height: 10rem; width: 10rem;"> 
+                      {% else %}
+                        <img src = "{% static 'Sentimate/images/default_pic.png' %}" class="img-raised rounded-circle img-fluid mx-auto" style="height: 10rem; width: 10rem;">
+                      {% endif %} 
+                    </div>
+                    <div class="col-md-8">
+                      <h5>See what {{ comparison.profile.name }} has to say</h5>
+                      <p>{{ comparison.profile.bio }} </p>
+                      <h5>Get in touch</h5>
+                      <div>
+                        <a href = "mailto: {{ comparison.profile.email }}"><i class="fas fa-envelope fa-lg" style="color: #404040; padding-right: 1.25rem;"></i></a>
+                        {% if comparison.profile.facebook %}
+                        <a href="{{ comparison.profile.facebook }}"><i class="fab fa-facebook fa-lg" style="color: #1928c4; padding-right: 1.25rem;"></i></a>
+                        {% endif %}
+                        {% if comparison.profile.instagram %}
+                        <a href="{{ comparison.profile.instagram }}"><i class="fab fa-instagram" style="color: #ff595e; padding-right: 1.25rem;"></i></a>
+                        {% endif %}
+                        {% if comparison.profile.linkedin %}
+                        <a href="{{ comparison.profile.linkedin }}"><i class="fab fa-linkedin fa-lg" style="color: #1928c4; padding-right: 1.25rem;"></i></a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+                    <div id="container" class="mx-auto my-5">
                         <canvas id="bar-chart"></canvas>
                     </div>
                     </div>
                     <div class="col-md-6">
-                  <div id="container" style="width: 90%;" class="mx-auto px-2 my-5">
+                  <div id="container" class="mx-auto my-5">
                       <canvas id="radar-chart"></canvas>
                   </div>
                   </div>
               </div>
-            </div>
             {% endif %}
             {% endif %}
             {% endif %}
@@ -174,7 +209,7 @@ The above copyright notice and this permission notice shall be included in all c
         },
         {
           label: "{{ comparison }}\'s Score",
-          backgroundColor: ["#40404080", "#40404080", "#40404080","#40404080", "#40404080"],
+          backgroundColor: ["#8ac926", "#8ac926", "#8ac926","#8ac926", "#8ac926"],
           data: {{ data_compare|safe }}  
         }
         ]
@@ -201,22 +236,22 @@ The above copyright notice and this permission notice shall be included in all c
           label: "Your score",
           data: {{ data_user|safe }},
           fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 202, 58, 0.1)',
+          borderColor: 'rgb(255, 202, 58)',
+          pointBackgroundColor: 'rgb(255, 202, 58)',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
+          pointHoverBorderColor: 'rgb(255, 202, 58)'
         }, {
           label: '{{ comparison }}\'s score',
           data: {{ data_compare|safe }},
           fill: true,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgb(54, 162, 235)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
+          backgroundColor: 'rgba(25, 40, 196, 0.2)',
+          borderColor: 'rgb(55, 40, 196)',
+          pointBackgroundColor: 'rgb(55, 40, 196)',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(54, 162, 235)'
+          pointHoverBorderColor: 'rgb(55, 40, 196)'
         }]
       },
       options: {
