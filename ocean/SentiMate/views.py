@@ -10,7 +10,7 @@ from .forms import UserRegisterForm, ProfileUpdateForm, TestBForm, TestAForm, Te
 from .TestB import questions
 from .TestA import questionsA
 from .TestC import questionsC
-from .models import TestB, TestA, TestC, TestC1
+from .models import TestB, TestA, TestC
 from django.conf import settings
 import os
 import numpy as np
@@ -177,7 +177,7 @@ def testC1(request):
         form = TestC1Form(request.POST)
         if  form.is_valid():
             ocean = form.process()
-            instance = TestC1(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+            instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
             instance.save()
             messages.success(request, f'Your response for test C has been saved.')
             return redirect('tests')
