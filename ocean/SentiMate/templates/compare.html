@@ -133,7 +133,7 @@ The above copyright notice and this permission notice shall be included in all c
             <p class="h4">{{ comparison }} hasn't attempted the tests. Please try again some time later.</p>
             <img src="{% static 'img/no results.svg'%}" alt="no result" class="my-3 mx-auto" style="height:20rem; width:20rem">
             {% else %}
-            <p class='h4'>Comparison Results</p>
+            <p class="h3 section-headline-dark">Comparison Results</p>
             <div class="mx-auto my-4" style="text-align: center;">
               <div class="col-md-8 mx-auto">
               <div class="card text-left">
@@ -152,15 +152,15 @@ The above copyright notice and this permission notice shall be included in all c
                       <p>{{ comparison.profile.bio }} </p>
                       <h5>Get in touch</h5>
                       <div>
-                        <a href = "mailto: {{ comparison.profile.email }}"><i class="fas fa-envelope fa-lg" style="color: #404040; padding-right: 1.25rem;"></i></a>
+                        <a href = "mailto: {{ comparison.profile.email }}"><i class="fas fa-envelope fa-2x" style="color: #404040; padding-right: 0.75rem; vertical-align: baseline;"></i></a>
                         {% if comparison.profile.facebook %}
-                        <a href="{{ comparison.profile.facebook }}"><i class="fab fa-facebook fa-lg" style="color: #1928c4; padding-right: 1.25rem;"></i></a>
+                        <a href="{{ comparison.profile.facebook }}"><i class="fab fa-facebook fa-lg fa-2x" style="color: #1928c4; padding-right: 0.75rem; vertical-align: baseline;"></i></a>
                         {% endif %}
                         {% if comparison.profile.instagram %}
-                        <a href="{{ comparison.profile.instagram }}"><i class="fab fa-instagram" style="color: #ff595e; padding-right: 1.25rem;"></i></a>
+                        <a href="{{ comparison.profile.instagram }}"><i class="fab fa-instagram fa-2x" style="color: #ff595e; padding-right: 0.75rem; vertical-align: baseline;"></i></a>
                         {% endif %}
                         {% if comparison.profile.linkedin %}
-                        <a href="{{ comparison.profile.linkedin }}"><i class="fab fa-linkedin fa-lg" style="color: #1928c4; padding-right: 1.25rem;"></i></a>
+                        <a href="{{ comparison.profile.linkedin }}"><i class="fab fa-linkedin fa-2x" style="color: #1928c4; padding-right: 0.75rem; vertical-align: baseline;"></i></a>
                         {% endif %}
                       </div>
                     </div>
@@ -204,27 +204,20 @@ The above copyright notice and this permission notice shall be included in all c
         datasets: [
         {
           label: "Your Score",
-          backgroundColor: ["#ff595e", "#ff595e", "#ff595e", "#ff595e", "#ff595e"],
+          borderColor: "#ffca3a",
+          borderWidth: 2, 
+          backgroundColor: ["#ffca3a90", "#ffca3a90", "#ffca3a90", "#ffca3a90", "#ffca3a90"],
           data: {{ data_user|safe }}  
         },
         {
           label: "{{ comparison }}\'s Score",
-          backgroundColor: ["#8ac926", "#8ac926", "#8ac926","#8ac926", "#8ac926"],
+          borderColor: "#6a4c93",
+          borderWidth: 2, 
+          backgroundColor: ["#6a4c9370", "#6a4c9370", "#6a4c9370","#6a4c9370", "#6a4c9370"],
           data: {{ data_compare|safe }}  
         }
         ]
       },
-      options: {
-        cutoutPercentage: 90,
-        circumference: 1 * Math.PI,
-        rotation: 1 * Math.PI,
-        title: {
-          display: false,
-        },
-        legend: {
-          display: true,
-        }
-      }
     });
   </script>
   <script>
@@ -236,12 +229,12 @@ The above copyright notice and this permission notice shall be included in all c
           label: "Your score",
           data: {{ data_user|safe }},
           fill: true,
-          backgroundColor: 'rgba(255, 202, 58, 0.1)',
-          borderColor: 'rgb(255, 202, 58)',
-          pointBackgroundColor: 'rgb(255, 202, 58)',
+          backgroundColor: 'rgba(255, 89, 94, 0.2)',
+          borderColor: 'rgb(255, 89, 94)',
+          pointBackgroundColor: 'rgb(255, 89, 94)',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 202, 58)'
+          pointHoverBorderColor: 'rgb(255, 89, 94)'
         }, {
           label: '{{ comparison }}\'s score',
           data: {{ data_compare|safe }},
@@ -257,7 +250,7 @@ The above copyright notice and this permission notice shall be included in all c
       options: {
         elements: {
           line: {
-            borderwidth: 3,
+            borderwidth: 2,
           }
         }
       },
