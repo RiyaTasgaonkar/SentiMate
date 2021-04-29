@@ -35,6 +35,7 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
   <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+  <script src="https://unpkg.com/scrollreveal"></script> 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link href="{% static 'demo/demo.css' %}" rel="stylesheet" /> -->
 </head>
@@ -104,7 +105,7 @@ The above copyright notice and this permission notice shall be included in all c
         <p class="h2 section-headline-dark" style="margin-bottom:4rem;">{{ user }}'s result.</p>
         <div class="row mx-auto">
           <div class="col-md-4 mx-auto">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3 chart">
               <div id="O-chart" class="mx-auto" style="width: 250px; height: 200px; margin: 20px;">
                 <h3 style="color: #ff595e; font-weight: normal; font-size: 25px;">Openness</h3>
               </div>
@@ -112,7 +113,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
           </div>
           <div class="col-md-4 mx-auto">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3 chart">
               <!-- <canvas id="C-chart"></canvas> -->
               <div id="C-chart" class="mx-auto" style="width: 250px; height: 200px; margin:20px;">
                 <h3 style="color: #1928c4; font-weight: normal; font-size: 25px;">Conscientiousness</h3>
@@ -121,7 +122,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
           </div>
           <div class="col-md-4 mx-auto">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3 chart">
               <!-- <canvas id="E-chart"></canvas> -->
               <div id="E-chart" class="mx-auto" style="width: 250px; height: 200px; margin: 20px;">
                 <h3 style="color: #8ac926; font-weight: normal; font-size: 25px;">Extraversion</h3>
@@ -133,7 +134,7 @@ The above copyright notice and this permission notice shall be included in all c
         <div class="row mx-auto">
           <div class="col-md-2"></div>
           <div class="col-md-4 mx-auto">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3 chart">
               <!-- <canvas id="A-chart"></canvas> -->
               <div id="A-chart" class="mx-auto" style="width: 250px; height: 200px; margin: 20px;">
                 <h3 style="color: #ffca3a; font-weight: normal; font-size: 25px;">Agreeableness</h3>
@@ -142,7 +143,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
           </div>
           <div class="col-md-4 mx-auto">
-            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3">
+            <div id="container" style="width: 90%;" class="mx-auto px-2 my-3 chart">
               <!-- <canvas id="N-chart"></canvas> -->
               <div id="N-chart" class="mx-auto" style="width: 250px; height: 200px; margin: 20px;">
                 <h3 style="color: #6a4c93; font-weight: normal; font-size: 25px;">Neuroticism</h3>
@@ -155,13 +156,13 @@ The above copyright notice and this permission notice shall be included in all c
         <p class="h3 section-headline-dark" style="padding-top: 4rem;">Overall Result</p>
         <div class="row my-3">
           <div class="col-md-6 mx-auto">
-            <div id="container" class="mx-auto my-5">
+            <div id="container chart" class="mx-auto my-5">
               <canvas id="pie-chart"></canvas>
             </div>
           </div>
           
           <div class="col-md-6 mx-auto">
-            <div id="container" class="mx-auto my-5">
+            <div id="container chart" class="mx-auto my-5">
               <canvas id="radar"></canvas>
             </div>
           </div>
@@ -183,7 +184,10 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </footer>
   <!--   Core JS Files   -->
-    
+  <script>
+    ScrollReveal().reveal('.row', { delay: 200, mobile: true});
+    ScrollReveal().reveal('.chart', { interval: 400, mobile: true});
+  </script>
   <script>
     // Chart for O  
     var bar = new ProgressBar.SemiCircle("#O-chart", {

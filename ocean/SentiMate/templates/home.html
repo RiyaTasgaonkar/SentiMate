@@ -34,6 +34,7 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
   <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+  <script src="https://unpkg.com/scrollreveal"></script> 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link href="{% static 'demo/demo.css' %}" rel="stylesheet" /> -->
 </head>
@@ -92,19 +93,19 @@ The above copyright notice and this permission notice shall be included in all c
     <div class="col-md-11 mx-auto py-5 mb-3">
       <p class="h2 section-headline">What we offer</p>
       <div class="row" style="margin:0 0 3rem 0;">
-        <div class="col-md-4 mx-auto py-5">
+        <div class="col-md-4 mx-auto py-5 item">
           <div class="feature mx-auto">
             <img src="{% static 'img/home-analyse.svg'%}" class="feature-img" alt="blog-image" style="width: 90%">
             <p class="h4 mt-3 pt-5" style="text-align: center;">Take test to<br> evaluate your traits</p>
           </div>
         </div>
-        <div class="col-md-4 mx-auto py-5">
+        <div class="col-md-4 mx-auto py-5 item">
           <div class="feature mx-auto" style="background-color: #8ac926;">
             <img src="{% static 'img/home-test.svg'%}" class="feature-img" alt="blog-image" style="width: 90%;">
             <p class="h4 mt-3 pt-5" style="text-align: center;">Get a detailed report<br> about your personality</p>
           </div>
         </div>
-        <div class="col-md-4 mx-auto py-5">
+        <div class="col-md-4 mx-auto py-5 item">
           <div class="feature mx-auto" style="background-color:#6a4c93;">
             <img src="{% static 'img/home-compare.svg'%}" class="feature-img" alt="blog-image" style="width: 90%;">
             <p class="h4 mt-3 pt-5" style="text-align: center;">Explore and connect<br>with friends</p>
@@ -136,6 +137,10 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </footer>
   <!--   Core JS Files   -->
+  <script>
+    ScrollReveal().reveal('.container', { delay: 200, mobile: true });
+    ScrollReveal().reveal('.item', { interval: 250, mobile: true});
+  </script>
   <script src="{% static 'js/core/jquery.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>

@@ -29,6 +29,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script> 
 
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
@@ -108,7 +109,7 @@ The above copyright notice and this permission notice shall be included in all c
                       {% csrf_token %}
                       <fieldset class="form-group">
                         {% for field in form.visible_fields %}<br>
-                        <div class="row">
+                        <div class="row question">
                           <div class="col-sm-6">
                             {{ field.errors }}
                             {{ field.help_text }}
@@ -149,6 +150,9 @@ The above copyright notice and this permission notice shall be included in all c
   </footer>
 
   <!--   Core JS Files   -->
+  <script>
+    ScrollReveal().reveal('.question', { delay: 100, mobile: true});
+  </script>
   <script type="text/javascript">
     $(document).ready(function(){
       $(document).on('submit',function(e){

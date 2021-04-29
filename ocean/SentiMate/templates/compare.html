@@ -33,6 +33,7 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Files -->
   <link href="{% static 'css/master.css' %}" rel="stylesheet" />
   <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+  <script src="https://unpkg.com/scrollreveal"></script> 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link href="{% static 'demo/demo.css' %}" rel="stylesheet" /> -->
 </head>
@@ -136,7 +137,7 @@ The above copyright notice and this permission notice shall be included in all c
             <p class="h3 section-headline-dark">Comparison Results</p>
             <div class="mx-auto my-4" style="text-align: center;">
               <div class="col-md-8 mx-auto">
-              <div class="card text-left">
+              <div class="card text-left item">
                 <div class="card-body">
                   <h4 class="card-title">{{ comparison.profile.name }}</h4>
                   <div class="row mx-auto">
@@ -169,14 +170,14 @@ The above copyright notice and this permission notice shall be included in all c
               </div>
             </div>
             </div>
-            <div class="row">
+            <div class="row item">
                 <div class="col-md-6">
-                    <div id="container" class="mx-auto my-5">
+                    <div id="container" class="mx-auto my-5 chart">
                         <canvas id="bar-chart"></canvas>
                     </div>
                     </div>
                     <div class="col-md-6">
-                  <div id="container" class="mx-auto my-5">
+                  <div id="container" class="mx-auto my-5 chart">
                       <canvas id="radar-chart"></canvas>
                   </div>
                   </div>
@@ -196,6 +197,10 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
   </footer>
   <!--   Core JS Files   -->
+  <script>
+    ScrollReveal().reveal('.item', { delay: 100, mobile: true});
+    ScrollReveal().reveal('.chart', { interval: 400, mobile: true});
+  </script>
   <script>
     var bar = new Chart(document.getElementById("bar-chart"), {
       type: 'bar',
