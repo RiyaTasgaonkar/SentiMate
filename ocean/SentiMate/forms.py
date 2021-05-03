@@ -85,11 +85,17 @@ class TestCForm(forms.Form):
 		username, password = self.cleaned_data['username'], self.cleaned_data['password']
 		bot = facebook_scrapper.fb_bot()
 		bot.login(username,password)
-		posts_scraped = bot.post_scraping()
-		posts_scraped = bot.remove_blank(posts_scraped)
-		bot.convert_to_csv(posts_scraped)
-		ocean = predict.predict()
-		return ocean
+		posts_scraped,status = bot.post_scraping()
+		if status == "success":
+			posts_scraped = bot.remove_blank(posts_scraped)
+			if posts_scraped == []:
+				return [],True,"empty"
+			else:
+				bot.convert_to_csv(posts_scraped)
+				ocean = predict.predict()
+				return ocean,True,"fill"
+		else:
+			return [],False,""
 
 
 class TestC1Form(forms.Form):

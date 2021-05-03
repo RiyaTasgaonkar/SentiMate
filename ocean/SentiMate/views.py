@@ -158,12 +158,20 @@ def testC(request):
     if request.method == 'POST':
         form = TestCForm(request.POST)
         if form.is_valid():
-            ocean = form.process()
-            print(ocean)
-            instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
-            instance.save()
-            messages.success(request, f'Your response for test C has been saved.')
-            return redirect('tests')
+            ocean,status,flag = form.process()
+            if status:
+                if flag == "fill":
+                    print(ocean)
+                    instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+                    instance.save()
+                    messages.success(request, f'Your response for test C has been saved.')
+                    return redirect('tests')
+                else:
+                    messages.success(request, f'No posts found, please attempt the alternate test.')
+                    return redirect('testC')
+            else:
+                messages.error(request, f'Invalid credentials, please check your reponse.')
+                return redirect('testC')
     else:
         form = TestCForm()
     context = {'user' : user, 'form' : form}

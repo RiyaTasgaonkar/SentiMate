@@ -23,6 +23,7 @@ class fb_bot():
 
     def login(self,username,password):        
         self.driver.get("https://mbasic.facebook.com")
+        
         #target username
         uname = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
         pword = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='pass']")))
@@ -35,32 +36,36 @@ class fb_bot():
 
         #target the login button and click it
         button = self.driver.find_element_by_name("login").click()
-
+        
 
     def post_scraping(self):
-        self.driver.get("https://mobile.facebook.com/profile.php?v=photos")
-        upload = self.driver.find_element_by_class_name("content")
-        upload.click()
+        try:
+            self.driver.get("https://mobile.facebook.com/profile.php?v=photos")
+            upload = self.driver.find_element_by_class_name("content")
+            upload.click()
 
-        for j in range(0,5):
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(2)
+            for j in range(0,5):
+                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(2)
+                
+            links = self.driver.find_elements_by_class_name("_39pi")
+            links = [a.get_attribute('href') for a in links]
+
+            post = [] 
+            for i in links:
+                self.driver.get(i)
+                po = self.driver.find_element_by_class_name("msg")
+                element = self.driver.find_element_by_class_name('actor')
+                self.driver.execute_script("""
+                var element = arguments[0];
+                element.parentNode.removeChild(element);
+                """, element)
+                post.append(po.text)
             
-        links = self.driver.find_elements_by_class_name("_39pi")
-        links = [a.get_attribute('href') for a in links]
+            return post,"success"
 
-        post = [] 
-        for i in links:
-            self.driver.get(i)
-            po = self.driver.find_element_by_class_name("msg")
-            element = self.driver.find_element_by_class_name('actor')
-            self.driver.execute_script("""
-            var element = arguments[0];
-            element.parentNode.removeChild(element);
-            """, element)
-            post.append(po.text)
-        
-        return post
+        except:
+            return [],"failure"
     
     def remove_blank(self,post):
         nb = [string for string in post if string != ""]
