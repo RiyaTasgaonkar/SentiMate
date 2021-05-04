@@ -94,6 +94,13 @@ The above copyright notice and this permission notice shall be included in all c
   <div class="main main-raised mb-5">
     <div class="container">
       <div class="section text-center">
+        {% if messages %}
+        {% for msg in messages%}
+        <div class="alert alert-dark">
+          {{ msg }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <p class="h4">Please enter your credentials for your facebook account to detect your traits based on your social media activity.</p><br>
         <div class="container">
           <div class="col-md-10 mx-auto">

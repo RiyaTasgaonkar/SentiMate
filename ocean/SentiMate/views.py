@@ -45,11 +45,11 @@ def scores(request):
     scoreC = TestC.objects.filter(user__exact = request.user)
     if scoreA and scoreB and scoreC:
         for sA, sB, sC in zip(scoreA, scoreB, scoreC):
-            data[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
-            data[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
-            data[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
-            data[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
-            data[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
+            data[0] = int(np.round((0.4*sA.o + 0.4*sB.o + 0.2*sC.o), 0))
+            data[1] = int(np.round((0.4*sA.c + 0.4*sB.c + 0.2*sC.c), 0))
+            data[2] = int(np.round((0.4*sA.e + 0.4*sB.e + 0.2*sC.e), 0))
+            data[3] = int(np.round((0.4*sA.a + 0.4*sB.a + 0.2*sC.a), 0))
+            data[4] = int(np.round((0.4*sA.n + 0.4*sB.n + 0.2*sC.n), 0))
             labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
             o,c,e,a,n = [data[0], 100-data[0]], [data[1], 100-data[1]], [data[2], 100-data[2]], [data[3], 100-data[3]], [data[4], 100-data[4]]
         found = True
@@ -90,20 +90,20 @@ def compare(request):
                 scoreC_compare = TestC.objects.filter(user__exact = comparison)
                 if scoreA_user and scoreB_user and scoreC_user:
                     for sA, sB, sC in zip(scoreA_user, scoreB_user, scoreC_user):
-                        data_user[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
-                        data_user[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
-                        data_user[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
-                        data_user[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
-                        data_user[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
+                        data_user[0] = int(np.round((0.4*sA.o + 0.4*sB.o + 0.2*sC.o), 0))
+                        data_user[1] = int(np.round((0.4*sA.c + 0.4*sB.c + 0.2*sC.c), 0))
+                        data_user[2] = int(np.round((0.4*sA.e + 0.4*sB.e + 0.2*sC.e), 0))
+                        data_user[3] = int(np.round((0.4*sA.a + 0.4*sB.a + 0.2*sC.a), 0))
+                        data_user[4] = int(np.round((0.4*sA.n + 0.4*sB.n + 0.2*sC.n), 0))
                         user_attempt = True
                         labels = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism']
                 if scoreA_compare and scoreB_compare and scoreC_compare:
                     for sA, sB, sC in zip(scoreA_compare, scoreB_compare, scoreC_compare):
-                        data_compare[0] = int(np.round((sA.o + sB.o + sC.o)/3, 0))
-                        data_compare[1] = int(np.round((sA.c + sB.c + sC.c)/3, 0))
-                        data_compare[2] = int(np.round((sA.e + sB.e + sC.e)/3, 0))
-                        data_compare[3] = int(np.round((sA.a + sB.a + sC.a)/3, 0))
-                        data_compare[4] = int(np.round((sA.n + sB.n + sC.n)/3, 0))
+                        data_compare[0] = int(np.round((0.4*sA.o + 0.4*sB.o + 0.2*sC.o), 0))
+                        data_compare[1] = int(np.round((0.4*sA.c + 0.4*sB.c + 0.2*sC.c), 0))
+                        data_compare[2] = int(np.round((0.4*sA.e + 0.4*sB.e + 0.2*sC.e), 0))
+                        data_compare[3] = int(np.round((0.4*sA.a + 0.4*sB.a + 0.2*sC.a), 0))
+                        data_compare[4] = int(np.round((0.4*sA.n + 0.4*sB.n + 0.2*sC.n), 0))
                         compare_attempt = True
                 return render(request, 'compare.html', {'user':user, 'form':form, 'get':get, 'found':found, 'user_attempt':user_attempt, 'compare_attempt':compare_attempt, 'data_user': data_user, 'data_compare': data_compare, 'labels':labels, 'comparison':comparison})                             
             else:
@@ -158,12 +158,19 @@ def testC(request):
     if request.method == 'POST':
         form = TestCForm(request.POST)
         if form.is_valid():
-            ocean = form.process()
-            print(ocean)
-            instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
-            instance.save()
-            messages.success(request, f'Your response for test C has been saved.')
-            return redirect('tests')
+            ocean, status, flag = form.process()
+            print(status)
+            print(flag)
+            if status:
+                if flag == "fill":
+                    print(ocean)
+                    instance = TestC(user = request.user, o = ocean[0], c = ocean[1], e = ocean[2], a = ocean[3], n = ocean[4])
+                    instance.save()
+                    messages.success(request, f'Your response for test C has been saved.')
+                    return redirect('tests')
+            else:
+                messages.error(request, f'Oops Found an issue. Check your credentials or your posts content')
+                return redirect('testC')
     else:
         form = TestCForm()
     context = {'user' : user, 'form' : form}
