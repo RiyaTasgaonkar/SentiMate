@@ -17,4 +17,4 @@ Three tests were used to determine scores for each Personality Trait
 
 Get a detailed report of your scores and also compare with friends and peers. 
 
-Have a look at our Machine learning models developed for <a href="https://github.com/RiyaTasgaonkar/OCEAN-clustering">Test B</a> and <a href="https://github.com/RiyaTasgaonkar/OCEAN-clustering">Test C</a>
+Have a look at our Machine learning models developed for <a href="https://github.com/RiyaTasgaonkar/OCEAN-clustering">Test B</a> and <a href="https://github.com/RiyaTasgaonkar/OCEAN-Trait-Prediction">Test C</a>
