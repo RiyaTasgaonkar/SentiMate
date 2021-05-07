@@ -11,10 +11,10 @@
 
 Three tests were used to determine scores for each Personality Trait
 
-* *Test A* : To determine your score according to your response to selected incidents.
-* *Test B* : Detemining the your scores according to group scores determined by machine learning model.
-* *Test C* : Determine your scores according to text written by you (or from your Facebook profile)
+* *Thoughts N Ideas* : To determine your score according to your response to selected incidents.
+* *Peer Studio* : Detemining the your scores according to group scores determined by machine learning model.
+* *Facebook Miner* : Determine your scores according to text written by you (or from your Facebook profile)
 
 Get a detailed report of your scores and also compare with friends and peers. 
 
-Have a look at our Machine learning models developed for <a href="https://github.com/RiyaTasgaonkar/OCEAN-clustering">Test B</a> and <a href="https://github.com/RiyaTasgaonkar/OCEAN-Trait-Prediction">Test C</a>
+Have a look at our Machine learning models developed for <a href="https://github.com/RiyaTasgaonkar/OCEAN-clustering">Peer Studio</a> and <a href="https://github.com/RiyaTasgaonkar/OCEAN-Trait-Prediction">Facebook Miner</a>
