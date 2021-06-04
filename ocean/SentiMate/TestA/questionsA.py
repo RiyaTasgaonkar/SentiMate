@@ -18,7 +18,7 @@ options = [
     ((1,'I will confront him/her'), (2,'I will not say anything to my friend'),(3,'Let him know some time later indirectly that his behaviour was incorrect.')),
     ((1,'Start your assignment then'), (2,'You are almost done but working on some final touches'),(3,'Relax and enjoy a movie as you have already completed it')),
     ((1,'I dont know what I am doing today evening'), (2,'I do plan same events but it it quite possible that i might deviate from my plans'),(3,'I plan everything and manage to complete all activities before deadline.')),
-    ((1,'I will prefer to be alone'), (2,'Nah I will find talk to only those who talk to me.'),(3,'Will go and talk to everyone')),
+    ((1,'I will prefer to be alone'), (2,'Nah I will  talk to only those who talk to me.'),(3,'Will go and talk to everyone')),
     ((1,'I prefer staying at home'), (2,'Will decide depending on the place and who all are coming'),(3,'Will immediately respond with yes')),
     ((1,'You feel it if okay if you are late or have a valid reason.'), (2,'You have at times but you know that is it the best portrayal of your behaviour'),(3,'Never as you do not believe that is is morally right')),
     ((1,' No I would try to avoid him/her saying I have some other work'), (2,' I will not stay awake the entire night but for some time.'),(3,' Will stay up an entire night for the friend')),

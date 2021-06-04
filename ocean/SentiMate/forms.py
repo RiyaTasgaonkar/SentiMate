@@ -67,7 +67,6 @@ class TestAForm(forms.Form):
 			self.fields['Question' + str(i)] = forms.ChoiceField(choices=ANSWER_CHOICES[i], help_text = questions[i])
 
 	def process(self):
-		time.sleep(3)
 		scores, ocean = [], []
 		for i in range(10):
 			x = int(self.cleaned_data['Question' + str(i)])
