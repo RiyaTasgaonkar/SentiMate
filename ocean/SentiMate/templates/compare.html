@@ -142,7 +142,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <h4 class="card-title">{{ comparison.profile.name }}</h4>
                   <div class="row mx-auto">
                     <div class="col-md-4">
-                      {% if request.user.profile.profile_pic %}
+                      {% if comparison.profile.profile_pic %}
                         <img src = "{{ comparison.profile.profile_pic.url }}" alt="your-picture" class="img-raised rounded-circle img-fluid mx-auto" style="height: 10rem; width: 10rem;"> 
                       {% else %}
                         <img src = "{% static 'Sentimate/images/default_pic.png' %}" class="img-raised rounded-circle img-fluid mx-auto" style="height: 10rem; width: 10rem;">
